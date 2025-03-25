@@ -1,15 +1,15 @@
 import React from 'react'
-import p2 from '../assets/images/p2.jpg'
-const ProductCard = () => {
+const ProductCard = ({product}) => {
   return (
     <>
-    <div className="box flex flex-col items-start gap-3 cursor-pointer">
+    <div className="box flex flex-col items-start gap-3 cursor-pointer p-2 border rounded-md border-blue-200">
         <div className="top">
-            <img src={p2} alt="" className='rounded-md'/>
+            <img src={product.images[0]} alt="product-image" loading='lazy' className='rounded-md'/>
         </div>
-        <div className="bottom flex flex-col gap-1">
-            <p className='text-lg'>lorem ipsum</p>
-            <span>$ 500</span>
+        <div className="bottom flex flex-col gap-0">
+          <small className='text-zinc-400'>{product?.category?.name}</small>
+            <p className='text-md lg:text-md'>{product?.title}</p>
+            <span className='font-semibold text-blue-500 mt-2'>$&nbsp;{product?.price}</span>
         </div>
     </div>
     </>

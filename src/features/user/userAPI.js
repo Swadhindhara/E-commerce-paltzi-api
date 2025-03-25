@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_BASE_URL;
 const getProfile = async () => {
   const token = localStorage.getItem("token");
   const parsedToken = JSON.parse(token)
-  const response = await axios.get(`https://api.escuelajs.co/api/v1/auth/profile`, {
+  const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/auth/profile`, {
     headers: {
       Authorization: `Bearer ${parsedToken.access_token}`,
     },
