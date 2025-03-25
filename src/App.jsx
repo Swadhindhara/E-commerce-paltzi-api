@@ -1,9 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom"
 import { Header } from "./_components"
 import Layout from "./Layout"
-import { Home, Login, NotFound, Register } from "./pages"
-import Products from "./pages/Products"
-import { useSelector } from "react-redux"
+import { Home, Login, NotFound, Register, Products, Profile } from "./pages"
 
 function App() {
 
@@ -20,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/products" element={<PrivateRoute><Products /></PrivateRoute>}/>
+        <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
       </Route>
     )
   )
