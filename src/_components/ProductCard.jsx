@@ -1,8 +1,8 @@
 import React from 'react'
-const ProductCard = ({product}) => {
+const ProductCard = ({product, handleProduct}) => {
   return (
     <>
-    <div className="box flex flex-col items-start gap-3 cursor-pointer p-2 border rounded-md border-blue-200">
+    <div className="box flex flex-col items-start gap-3 cursor-pointer p-2 border rounded-md border-blue-200" onClick={() => handleProduct(product?.slug)}>
         <div className="top">
             <img src={product.images[0]} alt="product-image" loading='lazy' className='rounded-md'/>
         </div>

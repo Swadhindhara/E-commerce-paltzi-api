@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom"
 import { Header } from "./_components"
 import Layout from "./Layout"
-import { Home, Login, NotFound, Register, Products, Profile } from "./pages"
+import { Home, Login, NotFound, Register, Products, Profile, Product } from "./pages"
 
 function App() {
 
@@ -17,6 +17,7 @@ function App() {
         <Route path="*" element={<NotFound/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/products/:slug" element={<Product />} />
         <Route path="/products" element={<PrivateRoute><Products /></PrivateRoute>}/>
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
       </Route>

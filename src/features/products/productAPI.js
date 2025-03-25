@@ -2,12 +2,16 @@ import axios from "axios";
 
 const getAllProducts = async() => {
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/products`);
-    console.log(response.data);
     return response.data;
     
 }
 
+const getSingleProduct = async(slug) => {
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/products/slug/${slug}`);
+    return response.data;
+}
 
-const productAPI = { getAllProducts };
+
+const productAPI = { getAllProducts, getSingleProduct };
 
 export default productAPI;

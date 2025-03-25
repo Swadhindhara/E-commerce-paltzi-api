@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Products from "./Products";
 import Profile from "./Profile";
+import Product from "./Product";
 
 export {
     Home,
@@ -11,5 +12,6 @@ export {
     Login,
     Register,
     Products,
-    Profile
+    Profile,
+    Product
 }

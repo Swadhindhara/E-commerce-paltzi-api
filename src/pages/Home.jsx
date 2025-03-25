@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import p1 from "../assets/images/p1.png";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/_components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "@/features/products/productSlice";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,6 +17,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+  const navigate = useNavigate()
+  const handleProduct = (product) => {
+    navigate('/products/' + product)
+  };
 
   return (
     <>
@@ -75,7 +79,7 @@ const Home = () => {
                 products
                   .slice(0, 8)
                   .map((product) => (
-                    <ProductCard key={product?.id} product={product} />
+                    <ProductCard key={product?.id} product={product} handleProduct={handleProduct}/>
                   ))
               )}
             </div>

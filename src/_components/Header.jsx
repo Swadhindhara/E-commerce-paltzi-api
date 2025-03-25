@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from './../assets/images/logo.svg'
 import { Link } from 'react-router-dom'
-import { LucideShoppingBag, SearchIcon, User2 } from 'lucide-react'
+import { SearchIcon, ShoppingCartIcon, User2 } from 'lucide-react'
 
 const Header = () => {
   return (
@@ -20,7 +20,7 @@ const Header = () => {
                 <User2 />
               </Link>
               <Link to={'/cart'}>
-                <LucideShoppingBag />
+                <ShoppingCartIcon />
               </Link>
             </div>
           </div>
