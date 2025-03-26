@@ -12,6 +12,12 @@ const getSingleProduct = async(slug) => {
 }
 
 
-const productAPI = { getAllProducts, getSingleProduct };
+const getByCategory = async(slug) => {
+    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/products/?categorySlug=${slug}`);
+    return response.data;
+}
+
+
+const productAPI = { getAllProducts, getSingleProduct, getByCategory };
 
 export default productAPI;

@@ -22,11 +22,23 @@ export const fetchSingleProduct = createAsyncThunk('products/fetchSingleProduct'
 });
 
 
+export const fetchSimilarProducts = createAsyncThunk('products/fetchSimilarProducts', async(slug, thunkAPI) => {
+    try {
+        const response = await productAPI.getByCategory(slug);
+        console.log(response);
+        return response;
+    } catch (error) {
+        return thunkAPI.rejectWithValue(error.message || "Failed to fetch");
+    }
+});
+
+
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
         product: null,
         products: [],
+        similarProducts : [],
         isLoading: false,
         isError: false,
     },
@@ -54,6 +66,21 @@ const productsSlice = createSlice({
             state.product = action.payload;
         })
         .addCase(fetchSingleProduct.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            console.error(action.payload);
+        })
+
+
+        // ============= For similar products ======================
+        .addCase(fetchSimilarProducts.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.similarProducts = action.payload;
+        })
+        .addCase(fetchSimilarProducts.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             console.error(action.payload);

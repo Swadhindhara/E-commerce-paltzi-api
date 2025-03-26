@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { fetchProducts, fetchSingleProduct } from '@/features/products/productSlice';
+import { fetchProducts, fetchSimilarProducts, fetchSingleProduct } from '@/features/products/productSlice';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,14 +8,21 @@ import { Heart, LucideTruck, Minus, Plus, RefreshCcw } from 'lucide-react';
 import { ProductCard } from '@/_components';
 const Product = () => {
   const {slug} = useParams()
+  // const [similar, setSimilar] =
   const dispatch = useDispatch();
-  const {product, isLoading, products} = useSelector((state) => state.products)
+  const {product, isLoading, similarProducts} = useSelector((state) => state.products)
     
   useEffect(()=> {
     dispatch(fetchSingleProduct(slug))
     dispatch(fetchProducts())
   }, [dispatch, slug])
-
+  
+  useEffect(() => {
+    if (product?.category?.slug) {
+      dispatch(fetchSimilarProducts(product.category.slug));
+    }
+  }, [dispatch, product?.category?.slug]);
+  
   const navigate = useNavigate()
   const handleProduct = (product) => {
     navigate('/products/' + product)
@@ -81,8 +88,8 @@ const Product = () => {
           <p className='text-xl mt-16'>Related Products</p>
           <div className="boxes grid lg:grid-cols-4 grid-cols-2 md:grid-cols-3 gap-6 gap-y-5 mt-6">
             {
-              products.slice(9, 13).map((product) => (
-                <ProductCard product={product} handleProduct={handleProduct}/>
+              !isLoading && similarProducts.slice(0, 4).map((product) => (
+                <ProductCard product={product} handleProduct={handleProduct} key={product?.id}/>
               ))
             }
           </div>
