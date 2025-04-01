@@ -1,7 +1,6 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { logout } from "@/features/auth/authSlice";
-import { getUser } from "@/features/user/userSlice";
 import {
   LockIcon,
   LogOutIcon,
@@ -12,9 +11,6 @@ import {
   Settings2Icon,
   UserCog2,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -23,26 +19,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useDispatch } from "react-redux";
+import { logout } from "@/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userDetails = useSelector((state) => state.user);
   const [profile, setProfile] = useState(null);
   const [step, setStep] = useState(1);
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]); // Fetch user details when component mounts
-
-  useEffect(() => {
-    setProfile(userDetails.user); // Update profile when Redux state changes
-  }, [userDetails]);
+  const dispatch = useDispatch()
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate("/");
-  };
+    dispatch(logout())
+    navigate('/')
+  }
 
   return (
     <div className="main px-4">
@@ -91,9 +81,7 @@ const Profile = () => {
                       </div>
                       <p>Password</p>
                     </div>
-                    <div
-                      onClick={handleLogout}
-                      className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
+                    <div onClick={handleLogout} className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
                     >
                       <div className="icon p-2 border-red-600 border rounded-sm">
                         <LogOutIcon className="text-red-600" />
@@ -102,7 +90,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                {profile && step === 1 && (
+                { step === 1 && (
                   <div className="w-full">
                     <p className="text-lg font-semibold mb-3">Edit Profile</p>
                     <div className="box w-full">
@@ -110,7 +98,7 @@ const Profile = () => {
                         <div className="left w-full lg:w-2/3 flex flex-col items-start gap-4">
                           <div className="box flex flex-col gap-2 w-full">
                             <label htmlFor="name">Full Name</label>
-                            <Input type="text" defaultValue={profile.name} />
+                            <Input type="text" defaultValue={profile?.name} />
                           </div>
                           <div className="box flex flex-col gap-2 w-full">
                             <label htmlFor="email">Email</label>
@@ -187,7 +175,7 @@ const Profile = () => {
                     <p>Password</p>
                   </div>
                   <div
-                    onClick={handleLogout}
+                  onClick={handleLogout}
                     className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
                   >
                     <div className="icon p-2 border-red-600 border rounded-sm">

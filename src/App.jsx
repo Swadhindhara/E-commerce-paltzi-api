@@ -2,12 +2,15 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterP
 import { Header } from "./_components"
 import Layout from "./Layout"
 import { Home, Login, NotFound, Register, Products, Profile, Product } from "./pages"
+import { useSelector } from "react-redux"
 
 function App() {
-
+  const {isAuthenticated} = useSelector((state) => state.auth)
+  console.log(isAuthenticated);
+  
+  
   const PrivateRoute = ({ children }) => {
-    const token = localStorage.getItem('token')
-    return token ? children : <Navigate to="/login" />;
+    return isAuthenticated ? children : <Navigate to="/login" />;
   };
 
   const router = createBrowserRouter(

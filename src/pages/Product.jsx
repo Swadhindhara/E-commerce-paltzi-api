@@ -34,9 +34,11 @@ const Product = () => {
       <div className="main px-4">
         <div className="container mx-auto">
           <div className="product w-full flex items-start lg:flex-row flex-col gap-6">
-            <div className="left lg:w-2/4 border"></div>
+            <div className="left lg:w-2/4 border h-full">
+            <img src={product?.images[0]} alt="" className={`rounded-md ${isLoading ? 'opacity-40' : ''}`}/>
+            </div>
             <div className="right lg:w-2/4 flex flex-col gap-4 items-start">
-              <h3 className='font-semibold text-xl lg:text-2xl'>{product?.title}</h3>
+              <h3 className={`font-semibold text-xl lg:text-2xl ${isLoading ? 'opacity-25' : ''}`}>{product?.title}</h3>
               <div className="content flex items-center gap-2">
                 <div className="stars flex items-center gap-1">
                   <img src={g3} alt="icon" className='w-4'/>
