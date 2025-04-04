@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import productAPI from "./productAPI";
 
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async(id, thunkAPI) => {
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async(filters, thunkAPI) => {
     try {
-        const products = await productAPI.getAllProducts(id);
+        const products = await productAPI.getAllProducts(filters);
         return products;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.message || "Failed to fetch products");

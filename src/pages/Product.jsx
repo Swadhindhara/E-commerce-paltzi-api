@@ -8,7 +8,6 @@ import { Heart, LucideTruck, Minus, Plus, RefreshCcw } from 'lucide-react';
 import { ProductCard } from '@/_components';
 const Product = () => {
   const {slug} = useParams()
-  // const [similar, setSimilar] =
   const dispatch = useDispatch();
   const {product, isLoading, similarProducts} = useSelector((state) => state.products)
     

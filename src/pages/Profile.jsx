@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,20 +19,30 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { fetchUser } from "@/features/user/userSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [step, setStep] = useState(1);
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.user);
 
   const handleLogout = () => {
     dispatch(logout())
     navigate('/')
   }
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [dispatch])
+  useEffect(()=>{
+    if(user){
+      setProfile(user)
+    }
+  }, [])
 
   return (
     <div className="main px-4">

@@ -12,6 +12,10 @@ const Products = () => {
   const dispatch = useDispatch();
   const [activeCategory, setActiveCategory] = useState(null)
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const [filters, setActiveFilter] = useState({
+    categoryId: '',
+    price: ''
+  })
   const { products, isLoading } = useSelector((state) => state.products);
   const { categories } = useSelector((state) => state.categories);
 
@@ -26,31 +30,46 @@ const Products = () => {
     navigate("/products/" + product);
   };
 
-  const handleCategory = (id) => {
-    if (activeCategory === id) {
-      setActiveCategory(null); 
-    } else {
-      setActiveCategory(id); 
-      dispatch(fetchProducts(id))
+
+  useEffect(() => {
+    const activeFilter = {};
+    if (filters.categoryId) {
+      activeFilter.categoryId = filters.categoryId;
     }
-  };
+  
+    dispatch(fetchProducts(activeFilter));
+  }, [dispatch, filters]);
+  
+
+  const handleCategory = (categoryId, index) => {
+    if(activeCategory === index){
+      setActiveCategory(null);
+    }else{
+      setActiveCategory(index);
+    }
+
+    setActiveFilter(prev => ({
+      ...prev,
+      categoryId: prev.categoryId === categoryId ? '' : categoryId,
+    }))
+  }
  
   return (
     <>
       <div className="main px-4">
         <div className="container mx-auto">
-          <div className="products flex items-start gap-3 flex-col md:flex-row">
-            <div className="left md:w-1/4 lg:w-1/4 flex items-start flex-col gap-5">
-              <div className="box flex items-center justify-between w-fit lg:w-full gap-3">
+          <div className="products flex items-start gap-5 flex-col md:flex-row">
+            <div className="left md:w-1/4 lg:w-1/4 flex items-start flex-col gap-5 border p-3 rounded-md">
+              <div className="box flex items-center justify-between w-fit lg:w-full gap-3 border-b border-zinc-300 pb-3">
                 <h3 className="font-semibold lg:text-2xl text-xl">Filters</h3>
                 <FilterIcon />
               </div>
-              <div className="categories flex flex-col gap-4">
+              <div className="categories flex flex-col gap-4 border-b border-zinc-300 pb-3">
                 <p>Categories</p>
                 <div className="boxes flex items-center gap-2 flex-wrap">
                   {
-                    categories.map((category) => (
-                      <div className={`box flex border py-1 px-4 rounded-md cursor-pointer transition-all delay-75 ${activeCategory === category?.id ? 'bg-blue-300 text-white border-blue-300 border' : ''}`} key={category?.id} onClick={() => handleCategory(category?.id)}>{category?.name}</div>
+                    categories.map((category, index) => (
+                      <div className={`box flex border py-1 px-4 rounded-md cursor-pointer transition-all delay-75 ${activeCategory === index ? 'bg-blue-300 text-white border-blue-300 border' : ''}`} key={category?.id} onClick={() => handleCategory(category?.id, index)}>{category?.name}</div>
                     ))
                   }
                 </div>

@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { login } from "@/features/auth/authSlice";
 
 const Login = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const {isLoading} = useSelector((state) => state.auth)
   const handleLogin = () => {
@@ -22,6 +23,7 @@ const Login = () => {
           password: "changeme",
         })
       );
+      navigate('/')
       if(!isLoading){
         toast.success("Logged in successfully!");
       }
