@@ -6,9 +6,9 @@ import categoryReducer from '../features/Categories/categorySlice'
 
 const store = configureStore({
     reducer: {
+        user: userReducer,
         auth: authReducer,
         categories: categoryReducer,
-        user: userReducer,
         products: productReducer,
     }
 })

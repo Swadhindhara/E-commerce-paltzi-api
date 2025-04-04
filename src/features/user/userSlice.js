@@ -3,8 +3,13 @@ import userAPI from "./userAPI";
 
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async (_, thunkAPI) => {
-    const response = await userAPI.getProfile();
-    return response;
+    try {
+        const response = await userAPI.getProfile();
+        console.log(response, 'profile');
+        return response;
+    } catch (error) {
+        thunkAPI.rejectWithValue(error.message || "No user available");
+    }
 });  
 
 const useSlice = createSlice({

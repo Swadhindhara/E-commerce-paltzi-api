@@ -28,21 +28,23 @@ const Profile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [step, setStep] = useState(1);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   const handleLogout = () => {
-    dispatch(logout())
-    navigate('/')
-  }
+    dispatch(logout());
+    navigate("/");
+  };
   useEffect(() => {
-    dispatch(fetchUser())
-  }, [dispatch])
-  useEffect(()=>{
-    if(user){
-      setProfile(user)
+    dispatch(fetchUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      setProfile(user);
     }
-  }, [])
+    console.log(profile);
+  }, []);
 
   return (
     <div className="main px-4">
@@ -91,7 +93,9 @@ const Profile = () => {
                       </div>
                       <p>Password</p>
                     </div>
-                    <div onClick={handleLogout} className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
+                    <div
+                      onClick={handleLogout}
+                      className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
                     >
                       <div className="icon p-2 border-red-600 border rounded-sm">
                         <LogOutIcon className="text-red-600" />
@@ -100,7 +104,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                { step === 1 && (
+                {step === 1 && (
                   <div className="w-full">
                     <p className="text-lg font-semibold mb-3">Edit Profile</p>
                     <div className="box w-full">
@@ -108,11 +112,11 @@ const Profile = () => {
                         <div className="left w-full lg:w-2/3 flex flex-col items-start gap-4">
                           <div className="box flex flex-col gap-2 w-full">
                             <label htmlFor="name">Full Name</label>
-                            <Input type="text" defaultValue={profile?.name} />
+                            <Input type="text" defaultValue={user?.name} />
                           </div>
                           <div className="box flex flex-col gap-2 w-full">
                             <label htmlFor="email">Email</label>
-                            <Input type="text" defaultValue={profile?.email} />
+                            <Input type="text" defaultValue={user?.email} />
                           </div>
                           <Button className="self-center bg-blue-400 cursor-pointer hover:bg-blue-500 mt-5">
                             Save Changes
@@ -120,7 +124,7 @@ const Profile = () => {
                         </div>
                         <div className="right w-1/3 flex flex-col items-center gap-3">
                           <img
-                            src={profile?.avatar}
+                            src={user?.avatar}
                             className="md:w-32 md:h-32 w-28 h-28 rounded-md"
                             alt="avatar_icon"
                           />
@@ -185,7 +189,7 @@ const Profile = () => {
                     <p>Password</p>
                   </div>
                   <div
-                  onClick={handleLogout}
+                    onClick={handleLogout}
                     className="tab flex items-center gap-4 cursor-pointer rounded-md hover:bg-blue-50 w-3/4 px-2 py-2 transition-all duration-300 ease"
                   >
                     <div className="icon p-2 border-red-600 border rounded-sm">

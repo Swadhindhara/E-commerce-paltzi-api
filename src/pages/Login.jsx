@@ -15,7 +15,7 @@ const Login = () => {
   const {isLoading} = useSelector((state) => state.auth)
   const handleLogin = () => {
     if (localStorage.getItem("token")) {
-      toast("You are already logged in!!");
+      toast.warning("You are already logged in!!");
     } else {
       dispatch(
         login({
