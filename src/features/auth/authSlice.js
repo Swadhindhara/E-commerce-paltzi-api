@@ -1,5 +1,8 @@
+import { toast } from "sonner";
 import authAPI from "./authAPI";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
+
 
 const storedToken = localStorage.getItem("token");
 
@@ -21,7 +24,7 @@ const authSlice = createSlice({
         token: storedToken ? JSON.parse(storedToken) : null,
         isAuthenticated: !!storedToken,
         isLoading: false,
-        isError: null,
+        isError: false,
     },
     reducers: {
         logout: (state) => {
@@ -34,18 +37,22 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(login.pending, (state) => {
-                state.isLoading = true;
-                state.isError = null;
-            })
-            .addCase(login.fulfilled, (state, action) => {
+        .addCase(login.pending, (state) => {
+            state.isLoading = true;
+            state.isError = false;
+        })
+        .addCase(login.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isAuthenticated = true;
                 state.token = action.payload;
+                window.location.href = '/';
+                toast.success('Successfully logged in!');
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
-                state.isError = action.payload || "Login failed";
+                state.isError = true;
+                state.isError = action.payload || 'Login failed';
+                toast.error('Invalid credentials');
             });
     },
 });

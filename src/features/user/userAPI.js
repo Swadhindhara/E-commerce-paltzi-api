@@ -10,7 +10,6 @@ const getProfile = async () => {
     });
 
     console.log(response.data, "from api");
-
     return response.data;
 };
 

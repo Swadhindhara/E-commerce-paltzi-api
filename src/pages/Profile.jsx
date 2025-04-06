@@ -39,12 +39,12 @@ const Profile = () => {
     dispatch(fetchUser());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (user) {
-      setProfile(user);
-    }
-    console.log(profile);
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     setProfile(user);
+  //   }
+  //   console.log(profile);
+  // }, []);
 
   return (
     <div className="main px-4">
@@ -56,7 +56,7 @@ const Profile = () => {
                 Account Setting
                 <span className={`block lg:hidden mt-3`}>
                   <SheetTrigger>
-                    <Settings2Icon />
+                    <Settings2Icon className="cursor-pointer"/>
                   </SheetTrigger>
                 </span>
               </h3>
