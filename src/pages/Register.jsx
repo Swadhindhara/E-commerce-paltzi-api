@@ -2,11 +2,33 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import g2 from '../assets/graphics/g2.png'
+import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { createUser, login } from "@/features/auth/authSlice";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {user, isLoading, isError} = useSelector((state) => state.auth);
+
+  const handleUser = () => {
+    dispatch(createUser(
+      {
+        name: "Swadhin",
+        email: "swad@gmail.com",
+        password: "qwertyuiop",
+        avatar: "https://picsum.photos/800"
+      }
+    ))
+  }
+  useEffect(() => {
+    if(!isError) {
+      console.log(user, "form registration");
+    }
+  }, [user])
   return (
     <>
       <div className="register_container px-4">
@@ -38,7 +60,7 @@ const Register = () => {
                   <Checkbox id="terms" />
                   <Label htmlFor="terms">I&apos;ve read and agree with terms of service and our privacy policy</Label>
                 </div>
-                <Button className='cursor-pointer mt-6'>Sign Up</Button>
+                <Button className='cursor-pointer mt-6' onClick = {handleUser}>Sign Up</Button>
                 <p className="mt-6 text-blue-300">Already have an account ? <Link className="text-zinc-500" to={'/login'}>Sign In</Link></p>
               </div>
             </div>

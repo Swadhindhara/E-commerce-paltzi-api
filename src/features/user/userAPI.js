@@ -13,6 +13,7 @@ const getProfile = async () => {
     return response.data;
 };
 
+
 const userAPI = { getProfile };
 
 export default userAPI;
