@@ -38,7 +38,8 @@ const Header = () => {
               <ShoppingCartIcon />
             </Link>
             {user ? (
-              <p>{user?.name}</p>
+              // <p>{user?.name}</p>
+              <Link to={'/profile'}><img src={user?.avatar} className="w-10 rounded-full cursor-pointer" alt="avatar" /></Link>
             ) : (
               <Link to={"/profile"}>
                 <User2 />

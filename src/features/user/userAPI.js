@@ -13,7 +13,16 @@ const getProfile = async () => {
     return response.data;
 };
 
+const updateProfile = async (id, userData) => {
+    try {
+        const response = await axios.put(`${import.meta.env.VITE_BASE_URL}/users/${id}`, userData);
+        return response.data;
+    } catch (error) {
+        return error.message;
+    }
+}
 
-const userAPI = { getProfile };
+
+const userAPI = { getProfile, updateProfile};
 
 export default userAPI;

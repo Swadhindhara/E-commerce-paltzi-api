@@ -30,6 +30,7 @@ export const createUser = createAsyncThunk("auth/createUser", async (data, thunk
     }
 });
 
+
 // Initial auth state
 const initialState = {
     user: null,
@@ -38,6 +39,7 @@ const initialState = {
     isLoading: false,
     isError: false,
     errorMessage: "",
+    isEmailAvailable: false
 };
 
 // Auth slice
@@ -65,8 +67,8 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isAuthenticated = true;
                 state.token = action.payload;
-                toast.success("Successfully logged in!");
                 window.location.href = "/"; 
+                toast.success("Successfully logged in!");
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
@@ -91,7 +93,7 @@ const authSlice = createSlice({
                 state.isError = true;
                 state.errorMessage = action.payload || "Failed to create user";
                 toast.error("Failed to create user");
-            });
+            })
     },
 });
 
