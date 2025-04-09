@@ -5,6 +5,8 @@ import Register from "./Register";
 import Products from "./Products";
 import Profile from "./Profile";
 import Product from "./Product";
+import Cart from "./Cart";
+import ConfirmPayment from "./ConfimePayment";
 
 export {
     Home,
@@ -13,5 +15,7 @@ export {
     Register,
     Products,
     Profile,
-    Product
+    Product,
+    Cart,
+    ConfirmPayment
 }

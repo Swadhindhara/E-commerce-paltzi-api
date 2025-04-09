@@ -10,11 +10,11 @@ const Header = () => {
   const [profile, setProfile] = useState();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
+  const items = useSelector((state) => state.cart.items);
 
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);
-
 
   return (
     <div className="header_container px-4">
@@ -35,11 +35,20 @@ const Header = () => {
               />
             </div>
             <Link to={"/cart"}>
-              <ShoppingCartIcon />
+              <div className="relative">
+                <ShoppingCartIcon />
+                {items.length > 0 && <div className="icon bg-blue-600 w-2 h-2 rounded-full absolute top-0 left-0"></div>}
+              </div>
             </Link>
             {user ? (
               // <p>{user?.name}</p>
-              <Link to={'/profile'}><img src={user?.avatar} className="w-10 rounded-full cursor-pointer" alt="avatar" /></Link>
+              <Link to={"/profile"}>
+                <img
+                  src={user?.avatar}
+                  className="w-10 rounded-full cursor-pointer"
+                  alt="avatar"
+                />
+              </Link>
             ) : (
               <Link to={"/profile"}>
                 <User2 />

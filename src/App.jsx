@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom"
 import { Header } from "./_components"
 import Layout from "./Layout"
-import { Home, Login, NotFound, Register, Products, Profile, Product } from "./pages"
+import { Home, Login, NotFound, Register, Products, Profile, Product, Cart, ConfirmPayment } from "./pages"
 import { useSelector } from "react-redux"
 
 function App() {
@@ -21,6 +21,8 @@ function App() {
         <Route path="/products/:slug" element={<Product />} />
         <Route path="/products" element={<PrivateRoute><Products /></PrivateRoute>}/>
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
+        <Route path="/cart" element={<PrivateRoute><Cart/></PrivateRoute>}/>
+        <Route path="/order-confirmation" element={<PrivateRoute><ConfirmPayment/></PrivateRoute>}/>
       </Route>
     )
   )

@@ -18,26 +18,26 @@ const Register = () => {
 
   const handleUser = async (data) => {
     console.log(data);
-    try {
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/is-available`, { email: data.email })
-      console.log(response.data);
-      return response.data
-    } catch (error) {
-      console.error(error.message);
-    }
-    
-    // if(data.checked === 'on'){
-    //   dispatch(createUser(
-    //     {
-    //       name: data.name,
-    //       email: data.email,
-    //       password: data.password,
-    //       avatar: "https://picsum.photos/800"
-    //     }
-    //   ))
-    // }else{
-    //   toast.warning('Please check the privacy policy and Terms and Conditions')
+    // try {
+    //   const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/is-available`, { email: data.email })
+    //   console.log(response.data);
+    //   return response.data
+    // } catch (error) {
+    //   console.error(error.message);
     // }
+    
+    if(data.checked === 'on'){
+      dispatch(createUser(
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          avatar: "https://picsum.photos/800"
+        }
+      ))
+    }else{
+      toast.warning('Please check the privacy policy and Terms and Conditions')
+    }
   }
   useEffect(() => {
     if(!isError) {

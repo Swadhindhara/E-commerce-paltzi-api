@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import g3 from './../assets/graphics/g3.png'
 import { Heart, LucideTruck, Minus, Plus, RefreshCcw } from 'lucide-react';
 import { ProductCard } from '@/_components';
+import { addToCart } from '@/features/cart/cartSlice';
 const Product = () => {
   const {slug} = useParams()
   const dispatch = useDispatch();
@@ -26,6 +27,10 @@ const Product = () => {
   const handleProduct = (product) => {
     navigate('/products/' + product)
   };
+
+  const handleCart = (product) => {
+    dispatch(addToCart(product))
+  }
   
   
   return (
@@ -37,7 +42,7 @@ const Product = () => {
             <img src={product?.images[0]} alt="" className={`rounded-md ${isLoading ? 'opacity-40' : ''}`}/>
             </div>
             <div className="right lg:w-2/4 flex flex-col gap-4 items-start">
-              <h3 className={`font-semibold text-xl lg:text-2xl ${isLoading ? 'opacity-25' : ''}`}>{product?.title}</h3>
+              <h3 className={`font-semibold text-xl lg:text-2xl text-blue-400 ${isLoading ? 'opacity-25' : ''}`}>{product?.title}</h3>
               <div className="content flex items-center gap-2">
                 <div className="stars flex items-center gap-1">
                   <img src={g3} alt="icon" className='w-4'/>
@@ -63,7 +68,7 @@ const Product = () => {
                     <Plus/>
                   </div>
                 </div>
-                <Button className={`cursor-pointer`}>Add to Cart</Button>
+                <Button className={`cursor-pointer bg-blue-400 hover:bg-blue-500`} onClick={() => handleCart(product)}>Add to Cart</Button>
                 <div className="icon p-1 border rounded-md cursor-pointer">
                   <Heart />
                 </div>
