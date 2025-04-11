@@ -4,6 +4,8 @@ const getAllProducts = async(filter = {}) => {
     const queryParams = new URLSearchParams(filter).toString();
     const url = queryParams ? `${import.meta.env.VITE_BASE_URL}/products/?${queryParams}` : `${import.meta.env.VITE_BASE_URL}/products`
     const response = await axios.get(url);
+    console.log(response.data);
+    
     return response.data;
 }
 

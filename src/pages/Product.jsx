@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { fetchProducts, fetchSimilarProducts, fetchSingleProduct } from '@/features/products/productSlice';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import g3 from './../assets/graphics/g3.png'
@@ -11,6 +11,19 @@ const Product = () => {
   const {slug} = useParams()
   const dispatch = useDispatch();
   const {product, isLoading, similarProducts} = useSelector((state) => state.products)
+  let [count, setCount] = useState(1)
+
+  const handlePlusCount = () => {
+    if(count > 0){
+      setCount(count + 1)
+    }
+  }
+
+  const handleMinusCount = () => {
+    if(count > 1){
+      setCount(count - 1)
+    }
+  }
     
   useEffect(()=> {
     dispatch(fetchSingleProduct(slug))
@@ -60,11 +73,11 @@ const Product = () => {
               <div className="line w-full h-0.5 bg-zinc-400"></div>
               <div className="box flex w-full items-center gap-4">
                 <div className="counter flex items-center gap-2">
-                  <div className="icon p-1 border rounded-md cursor-pointer">
+                  <div className="icon p-1 border rounded-md cursor-pointer" onClick={handleMinusCount}>
                     <Minus/>
                   </div>
-                  <div className="value w-10 flex justify-center items-center py-2">1</div>
-                  <div className="icon p-1 border rounded-md cursor-pointer">
+                  <div className="value w-10 flex justify-center items-center py-2">{count}</div>
+                  <div className="icon p-1 border rounded-md cursor-pointer" onClick={handlePlusCount}>
                     <Plus/>
                   </div>
                 </div>

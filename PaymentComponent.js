@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { addReferenceId } from "@/features/cart/cartSlice";
 import { toast } from "sonner";
 
-export const loadRazorpay = (amount, navigate) => {
+export const loadRazorpay = (amount, navigate, dispatch) => {
   const options = {
       key: "rzp_test_1PwaSNZkMjskIj",
       amount: amount * 100,
@@ -14,6 +14,7 @@ export const loadRazorpay = (amount, navigate) => {
         navigate('/order-confirmation')
         toast.success("Payment Successful!")
         
+        dispatch(addReferenceId(response))
       },
       prefill: {
         name: "Swadhin Dhara",

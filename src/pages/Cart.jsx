@@ -12,11 +12,12 @@ const Cart = () => {
   const items = useSelector((state) => state.cart.items);
   const total = useSelector((state) => state.cart.total);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   let wholeTotal = total - (5 / 100) * total;
 
   const handlePayment = (wholeTotal) => {
-    loadRazorpay(wholeTotal, navigate)
+    loadRazorpay(wholeTotal, navigate, dispatch)
   }
 
   return (

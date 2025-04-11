@@ -1,11 +1,20 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
+import { nanoid } from "@reduxjs/toolkit";
+import React, { useId } from "react";
 import { useSelector } from "react-redux";
 
 const ConfimePayment = () => {
   const {user} = useSelector((state) => state.user)
   const items = useSelector((state) => state.cart.items);
   const total = useSelector((state) => state.cart.total);
+  const referenceID = useSelector((state) => state.cart.referenceID);
+  const id = nanoid()
+  let newId = id.split('').slice(0, 10).join('');
+  console.log(newId);
+  
+
+
+  const date = new Date().toLocaleDateString()
 
   let wholePrice = total - ((5 / 100) * total)
   return (
@@ -46,15 +55,15 @@ const ConfimePayment = () => {
                   <div className="boxes flex items-center w-full">
                     <div className="box w-1/3 flex flex-col items-start gap-1 px-2">
                       <p className="font-light text-zinc-400">Date</p>
-                      <p>02 May 2025</p>
+                      <p>{date}</p>
                     </div>
                     <div className="box w-1/3 flex flex-col items-start gap-1 px-2 border-l-1 border-zinc-300">
                       <p className="font-light text-zinc-400">Payment ID</p>
-                      <p>jihi34eiuii9</p>
+                      <p className="text-sm">{referenceID?.razorpay_payment_id}</p>
                     </div>
                     <div className="box w-1/3 flex flex-col items-start gap-1 px-2 border-l-1 border-zinc-300">
                       <p className="font-light text-zinc-400">Order Number</p>
-                      <p>jihi34eiuii9</p>
+                      <p className="text-sm">{newId}</p>
                     </div>
                   </div>
                   <div className="box w-full h-[4px] border-t-1 border-dotted relative border-zinc-400 flex items-center">

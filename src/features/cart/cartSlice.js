@@ -7,6 +7,7 @@ const cartSlice = createSlice({
     initialState: {
         items: [],
         total: 0,
+        referenceID: ""
     },
     reducers: {
         addToCart: (state, action) => {
@@ -31,11 +32,14 @@ const cartSlice = createSlice({
             state.items = [];
             state.total = 0;
             toast.success('All products are removed from cart!')
+        },
+        addReferenceId : (state, action) => {
+            state.referenceID = action.payload
         }
     }
 })
 
 
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, addReferenceId } = cartSlice.actions;
 export default cartSlice.reducer;
