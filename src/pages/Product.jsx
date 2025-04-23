@@ -42,7 +42,7 @@ const Product = () => {
   };
 
   const handleCart = (product) => {
-    dispatch(addToCart(product))
+    dispatch(addToCart({...product, quantity : count}))
   }
   
   

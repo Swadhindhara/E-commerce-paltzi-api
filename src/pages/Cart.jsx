@@ -54,7 +54,7 @@ const Cart = () => {
                   </div>
                 </div>
                 {items.map((item) => (
-                  <CartCard key={item.id} item={item} />
+                  <CartCard key={item.id} item={item}/>
                 ))}
               </div>
             </div>

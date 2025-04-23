@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "sonner";
 
-
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
@@ -11,35 +10,41 @@ const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state, action) => {
-            const existingItem = state.items.find(item => item.id === action.payload.id);
+            const { id, price, quantity = 1 } = action.payload;
+            const existingItem = state.items.find(item => item.id === id);
+
             if (existingItem) {
-                existingItem.quantity++;
+                existingItem.quantity += quantity;
             } else {
-                state.items.push({...action.payload, quantity: 1 });
+                state.items.push({ ...action.payload, quantity });
             }
-            state.total += action.payload.price;
-            toast.success('Product successfully added to cart!')
+
+            state.total += price * quantity;
+            toast.success(`${quantity} product(s) successfully added to cart!`);
         },
+
         removeFromCart: (state, action) => {
             const index = state.items.findIndex(item => item.id === action.payload.id);
+
             if (index !== -1) {
+                const item = state.items[index];
+                state.total -= item.price * item.quantity;
                 state.items.splice(index, 1);
-                state.total -= action.payload.price * action.payload.quantity;
+                toast.success('Product successfully removed from cart!');
             }
-            toast.success('Product successfully remove from cart!')
         },
+
         clearCart: (state) => {
             state.items = [];
             state.total = 0;
-            toast.success('All products are removed from cart!')
+            toast.success('All products are removed from cart!');
         },
-        addReferenceId : (state, action) => {
-            state.referenceID = action.payload
+
+        addReferenceId: (state, action) => {
+            state.referenceID = action.payload;
         }
     }
-})
-
-
+});
 
 export const { addToCart, removeFromCart, clearCart, addReferenceId } = cartSlice.actions;
 export default cartSlice.reducer;
