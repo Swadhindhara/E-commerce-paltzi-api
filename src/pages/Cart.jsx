@@ -24,8 +24,8 @@ const Cart = () => {
     <>
       <div className="cart_container px-4 bg-[#EFF3F6]">
         <div className="container mx-auto">
-          <div className="cart py-8 flex items-start gap-8">
-            <div className="left w-4/6 flex flex-col items-start gap-4">
+          <div className="cart py-8 flex items-start gap-8 flex-col lg:flex-row">
+            <div className="left w-full lg:w-4/6 flex flex-col items-start gap-4">
               <div className="content flex flex-col gap-2">
                 <p className="lg:text-2xl text-xl font-semibold">
                   Shopping Bag
@@ -58,7 +58,7 @@ const Cart = () => {
                 ))}
               </div>
             </div>
-            <div className="right w-2/6 border-red-400 shadow-lg rounded-xl bg-white p-4">
+            <div className="right w-full md:w-2/3 lg:w-2/6 border-red-400 shadow-lg rounded-xl bg-white p-4">
               <div className="box flex flex-col gap-3 border-b-1 border-zinc-300 pb-4">
                 <p className="text-xl">Coupon Code</p>
                 <small className="text-zinc-400">
@@ -103,8 +103,8 @@ const Cart = () => {
               </div>
             </div>
           </div>
-          <div className="boxes w-full flex items-center gap-4 py-8">
-            <div className="box w-1/4 bg-white flex items-center gap-3 flex-row rounded-lg p-3 shadow-xl">
+          <div className="boxes w-full flex items-center flex-wrap gap-4 py-8 border">
+            <div className="box lg:w-1/4 md:w-1/3 w-full bg-white flex items-center gap-3 flex-row rounded-lg p-3 shadow-xl">
               <div className="icon w-10 h-10 flex items-center justify-center rounded-sm bg-red-300">
                 <LucideTruck />
               </div>
@@ -113,7 +113,7 @@ const Cart = () => {
                 <small className="text-zinc-400">when you spend $50+</small>
               </div>
             </div>
-            <div className="box w-1/4 bg-white flex items-center gap-3 rounded-lg p-3 shadow-xl">
+            <div className="box lg:w-1/4 md:w-1/3 w-full bg-white flex items-center gap-3 rounded-lg p-3 shadow-xl">
               <div className="icon w-10 h-10 flex items-center justify-center rounded-sm bg-yellow-200">
                 <PhoneCall />
               </div>
@@ -122,7 +122,7 @@ const Cart = () => {
                 <small className="text-zinc-400">033 898 9 8900</small>
               </div>
             </div>
-            <div className="box w-1/4 bg-white flex items-center gap-3 rounded-lg p-3 shadow-xl">
+            <div className="box lg:w-1/4 md:w-1/3 w-full bg-white flex items-center gap-3 rounded-lg p-3 shadow-xl">
               <div className="icon w-10 h-10 flex items-center justify-center rounded-sm bg-green-300">
                 <MessageCircleMoreIcon />
               </div>
@@ -131,7 +131,7 @@ const Cart = () => {
                 <small className="text-zinc-400">when offer 24hrs chat support</small>
               </div>
             </div>
-            <div className="box w-1/4 bg-white flex items-center gap-3 rounded-lg p-3 shadow-xl">
+            <div className="box lg:w-1/4 md:w-1/3 w-full bg-white flex items-center gap-3 rounded-lg p-3 shadow-xl">
               <div className="icon w-10 h-10 flex items-center justify-center rounded-sm bg-blue-300">
                 <GiftIcon />
               </div>
