@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import g2 from '../assets/graphics/g2.png'
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 import { createUser, login } from "@/features/auth/authSlice";
 import { toast } from "sonner";
 import axios from "axios";
+import g4 from '../assets/graphics/g4.png'
+import g5 from '../assets/graphics/g5.png'
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -53,7 +55,11 @@ const Register = () => {
               <h2 className="font-bold text-3xl">Sign Up</h2>
               <div className="box flex items-center gap-4">
                 <div className="line w-16 h-1 bg-black"></div>
-                <p className="text-blue-400">Sign up with</p>
+                <p className="text-blue-400" >Sign up with</p>
+              </div>
+              <div className="w-full flex gap-3 items-center md:flex-row flex-col">
+                <div className="google w-full md:w-1/2 bg-white flex items-center justify-center border py-2 text-black rounded-lg shadow-xl cursor-pointer gap-2" ><img src={g4} alt="" className="w-5"/> Sign Up with Google</div>
+                <div className="fb w-full  md:w-1/2 bg-blue-400 flex items-center justify-center py-2 text-white rounded-lg shadow-xl cursor-pointer gap-2"> <img src={g5} alt="" className="w-5"/> Sign Up with facebook</div>
               </div>
               <h3 className="self-center">or</h3>
               <form className="form w-full" onSubmit={handleSubmit(handleUser)}>
